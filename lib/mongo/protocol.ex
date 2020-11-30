@@ -156,9 +156,9 @@ defmodule Mongo.Protocol do
     # wire version
     # https://github.com/mongodb/mongo/blob/master/src/mongo/db/wire_version.h
     require Logger
-    Logger.debug("s: #{s |> inspect}")
+    #Logger.debug("s: #{s |> inspect}")
     result = Utils.command(-1, [ismaster: 1], s)
-    Logger.debug("command result: #{result |> inspect}")
+    #Logger.debug("command result: #{result |> inspect}")
     case result do
       {:ok, %{"ok" => ok, "maxWireVersion" => version}} when ok == 1 ->
         {:ok, %{s | wire_version: version}}
