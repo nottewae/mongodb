@@ -55,7 +55,7 @@ defmodule Mongo.Protocol.Utils do
     case message(id, op, s) do
       {:ok, op_reply(docs: docs)} ->
         case BSON.Decoder.documents(docs) do
-          [] -> {:ok, %{"ok"=>1}}
+          [] -> {:ok, nil}
           [doc] -> {:ok, doc}
         end
 

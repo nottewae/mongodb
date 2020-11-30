@@ -169,7 +169,9 @@ defmodule Mongo.Protocol do
       {:ok, %{"ok" => ok, "errmsg" => msg, "code" => code}} when ok == 0 ->
         err = Mongo.Error.exception(message: msg, code: code)
         {:disconnect, err, s}
-
+      {:ok, nil} ->
+        err = Mongo.Error.exception(message: "unknow error", code: 500)
+        {:disconnect, err, s}
       {:disconnect, _, _} = error ->
         error
     end
